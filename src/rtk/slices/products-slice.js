@@ -8,12 +8,18 @@ import {createAsyncThunk, createSlice } from "@reduxjs/toolkit";
   })
 
 const product_slice=createSlice({
-    initialState:[],
+    initialState:{loading:false,books:[]},
     name:"product_slice",
     reducers:{},
     extraReducers:(builder)=>{
+        
+        builder.addCase(fetchProduct.pending,(state,action)=>{
+            console.log(action.payload)
+            state.loading=true
+        })
         builder.addCase(fetchProduct.fulfilled,(state,action)=>{
-            return action.payload
+            state.loading=false
+            state.books= action.payload
         })
     }
 

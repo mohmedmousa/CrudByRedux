@@ -8,8 +8,8 @@ import { addcart } from "../rtk/slices/cartSlice";
 
 
 function Products(){
-    const products = useSelector((state) => state.products)
-    console.log(products)
+    const {loading,books} = useSelector((state) => state.products)
+    console.log(books)
     const dispatch= useDispatch()
     useEffect(()=>{
         dispatch(fetchProduct())
@@ -20,8 +20,8 @@ function Products(){
         <Container>
             <div className="row pt-5 d-flex">
                 
-                    {products.slice(0,14).map((product)=>(
-                    <div className="col-3 pt-3" key={product.id}>
+                    {loading===true?'loading...': books.slice(0,14).map((product)=>(
+                    <div className="col-lg-3 col-md-5 pt-3 mx-4" key={product.id}>
                         <Card style={{ width: '18rem' }}>
                         <Card.Img variant="top" src={product.image} style={{height:"200px"}} />
                         <Card.Body>
@@ -40,7 +40,8 @@ function Products(){
             </div>
         </Container>
         
-    )
+    
+    
     </>
     )
 }
